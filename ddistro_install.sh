@@ -47,4 +47,4 @@ python3 install_nltk.py || handle_error "Failed to install NLTK components"
 echo "Running configuration script..."
 ./conf.sh || handle_error "Failed to run configuration script"
 
-echo "Installation process completed!
+echo "Installation process completed!"
