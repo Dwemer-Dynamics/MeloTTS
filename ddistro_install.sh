@@ -1,11 +1,14 @@
 #!/bin/bash
 
+set -euo pipefail
+
 # Function to handle errors
 handle_error() {
     echo "ERROR: $1" >&2
-    echo "Continuing with installation..."
+    echo "Installation cannot continue."
     echo "Press ENTER to continue"
-    read -r
+    read -r || true
+    exit 1
 }
 
 # Navigate to directory
@@ -28,7 +31,8 @@ source /home/dwemer/python-melotts/bin/activate || handle_error "Failed to activ
 # Install requirements
 echo "This will take a while so please wait."
 echo "Installing requirements..."
-pip install -r requirements.txt || handle_error "Failed to install requirements"
+python -m pip install --upgrade pip 'setuptools<81' wheel || handle_error "Failed to install compatible packaging tools"
+python -m pip install -r requirements.txt || handle_error "Failed to install requirements"
 
 # Download unidic
 echo "This download will take a while....be patient"
@@ -37,7 +41,7 @@ python -m unidic download || handle_error "Failed to download unidic models"
 
 # Install package
 echo "Installing package..."
-pip install -e . || handle_error "Failed to install package"
+python -m pip install -e . || handle_error "Failed to install package"
 
 # Install NLTK
 echo "Installing NLTK components..."
