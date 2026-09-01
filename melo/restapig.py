@@ -35,6 +35,24 @@ models = {
 # Speaker IDs for each language
 speaker_ids = models['SkyrimLikeVoices'].hps.data.spk2id
 
+
+@restapi.get("/health")
+async def health():
+    return {
+        "status": "ok",
+        "provider": "melotts",
+        "runtime": "python",
+        "port": 8084,
+        "device": device,
+        "model_loaded": model_custom is not None,
+        "speaker_count": len(speaker_ids),
+    }
+
+
+@restapi.get("/provider_info")
+async def provider_info():
+    return await health()
+
 # Pydantic model for request body
 class TTSRequest(BaseModel):
     speaker: str
