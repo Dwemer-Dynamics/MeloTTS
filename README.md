@@ -60,7 +60,7 @@ If you find this work useful, please consider contributing to this repo.
 
 ## License
 
-This library is under MIT License, which means it is free for both commercial and non-commercial use.
+This fork is distributed under GNU GPLv3 only. See LICENSE and LICENSING.md. The original MIT notice is preserved in LICENSES/MIT-original.txt.
 
 ## Acknowledgements
 
